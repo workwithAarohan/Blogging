@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/category','CategoryController');
+
+Route::get('/test','TestController@index')->name('test.index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
