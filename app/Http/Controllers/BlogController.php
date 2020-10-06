@@ -99,6 +99,24 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $blog = Blog::find($id);
+        $blog->title = $request->input('title');
+        $blog->content = $request->input('content');
+        $blog->description = $request->input('description');
+        $blog->cat_id = $request->input('cat_id');
+        $blog->user_id = $request->input('user_id');
+
+        if($request->hasFile('image'))
+        {
+            $image=$request->file('image');
+            $filename = $image->getClientOriginalName();
+            $Path = public_path() . '/image/';
+            $image->move($Path, $filename);
+            $blog->image=$filename;
+        }
+
+        $blog->save();
+        return Redirect::to('blog');
     }
 
     /**
@@ -110,5 +128,9 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+        $blog = Blog::find($id);
+        $blog->delete();
+
+        return Redirect::to('blog');
     }
 }
