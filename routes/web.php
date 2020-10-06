@@ -23,3 +23,5 @@ Route::get('/test','TestController@index')->name('test.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/blog','BlogController');
