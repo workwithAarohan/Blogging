@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Blog;
+use View;
+use Redirect;
 
 class BlogController extends Controller
 {
@@ -14,6 +17,8 @@ class BlogController extends Controller
     public function index()
     {
         //
+        $blog = Blog::all();
+        return View::make('blog.index')->with('blog', $blog);
     }
 
     /**
@@ -24,6 +29,7 @@ class BlogController extends Controller
     public function create()
     {
         //
+        return View::make('blog.create');
     }
 
     /**
@@ -35,6 +41,16 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
+        $blog = new blog();
+        $blog->title = $request->input('title');
+        $blog->content = $request->input('content');
+        $blog->description = $request->input('description');
+        $blog->cat_id = $request->input('category');
+        $blog->image = $request->input('image');
+        $blog->user_id = '1';
+
+        $blog->save();
+        return Redirect::to('blog');
     }
 
     /**
@@ -46,6 +62,7 @@ class BlogController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -57,6 +74,8 @@ class BlogController extends Controller
     public function edit($id)
     {
         //
+        $blog = Blog::find($id);
+        return View::make('blog.edit')->with('blog', $blog);
     }
 
     /**
