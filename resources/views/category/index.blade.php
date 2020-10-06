@@ -9,12 +9,12 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col col-md-7 mb-4">
-                <a href="{{Route('category.create')}}" class="float-right text-muted text-decoration-none ">Add New Category</a>
+                <a href="{{Route('category.create')}}" class="btn border float-right text-muted text-decoration-none ">Add New Category</a>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col col-md-7">
-                <table class="table table-bordered text-center">
+            <div class="col col-md-7 pt-3 shadow bg-white rounded">
+                <table class="table text-center">
                     <thead >
                         <tr>
                             <th>id</th>
