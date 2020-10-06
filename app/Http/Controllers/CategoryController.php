@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use View;
+use Redirect;
 
 class CategoryController extends Controller
 {
@@ -28,6 +29,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return View::make('category.create');
     }
 
     /**
@@ -39,6 +41,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $category = new Category;
+        $category->title = $request->input('title');
+
+        $category->save();
+
+        return Redirect::to('category');
     }
 
     /**
@@ -61,6 +69,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
+        $category = Category::find($id);    //SELECT * from categories where id = $id;
+        return View::make('category.edit')->with('category',$category);
     }
 
     /**
@@ -73,6 +83,12 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $category = Category::find($id);
+        $category->title = $request->input('title');
+
+        $category->save();
+
+        return Redirect::to('category');
     }
 
     /**
@@ -84,5 +100,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        $category = Category::find($id);
+        $category->delete();
+
+        return Redirect::to('category');
     }
 }
