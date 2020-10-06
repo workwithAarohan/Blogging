@@ -11,7 +11,7 @@
             <div class="row justify-content-center pb-4">
                 <div class="col">          
                     <a href="{{URL::to('/blog/'.$value->id)}}">
-                        <img src="/image/{{$value->image}}" class="w-100">
+                        <img src="/image/{{$value->image}}" class="w-100"> 
                     </a>
                 </div>
                 <div class="col">
