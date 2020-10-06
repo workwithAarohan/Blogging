@@ -18,10 +18,11 @@ Route::get('/', function () {
 Route::resource('/category','CategoryController');
 Route::get('/del_category/{cat_id}','CategoryController@destroy')->name('delete.category');
 
+Route::resource('/blog','BlogController');
+
 Route::get('/test','TestController@index')->name('test.index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/blog','BlogController');
