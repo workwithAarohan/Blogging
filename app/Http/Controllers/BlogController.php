@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 use App\Blog;
 use View;
 use Redirect;
@@ -29,7 +30,8 @@ class BlogController extends Controller
     public function create()
     {
         //
-        return View::make('blog.create');
+        $category = Category::all();                   //Select * from categories;
+        return View::make('blog.create')->with('category',$category);
     }
 
     /**
@@ -45,9 +47,17 @@ class BlogController extends Controller
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
         $blog->description = $request->input('description');
-        $blog->cat_id = $request->input('category');
-        $blog->image = $request->input('image');
-        $blog->user_id = '1';
+        $blog->cat_id = $request->input('cat_id');
+        $blog->user_id = $request->input('user_id');
+
+        if($request->hasFile('image'))
+        {
+            $image=$request->file('image');
+            $filename = $image->getClientOriginalName();
+            $Path = public_path() . '/image/';
+            $image->move($Path, $filename);
+            $blog->image=$filename;
+        }
 
         $blog->save();
         return Redirect::to('blog');
@@ -62,7 +72,8 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        
+        $blog = Blog::find($id);
+        return View::make('blog.show')->with('blog',$blog);
     }
 
     /**

@@ -10,7 +10,7 @@
             <div class="col-9">
                 <h4>Create Blog</h4>
 
-                <form action="{{URL::to('blog')}}" method="POST" enctype="mulipart/form-data">
+                <form action="{{URL::to('blog')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -28,11 +28,13 @@
                         <label for="image">image</label>
                         <input type="file" class="form-control" id="image" name="image">
                     </div>
+                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select name="category">
-                            <option value="1">Artificial Technologies</option>
-                            <option value="2">Technologies</option>
+                        <select name="cat_id">
+                            @foreach($category as $value)
+                                <option value="{{$value->id}}">{{$value->title}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <button class="btn btn-success" type="submit">Add</button>
@@ -41,3 +43,6 @@
         </div>
     </div>
 @endsection
+
+
+
