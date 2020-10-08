@@ -77,7 +77,8 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $feedback = Feedback::where('blog_id',$id)->get(); // SELECT * FROM feedback where blog_id=$id;
         
-        foreach($feedback as $value){
+        foreach($feedback as $value)
+        {
             $user = User::where('id', $value->user_id)->get();
             $value->user = $user;
         }
