@@ -1,37 +1,30 @@
 @extends('layouts.sidebar')
 
 @section('title')
-    Category
+    Users
 @endsection
 
-
 @section('content')
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col col-md-7 mb-4">
-                <a href="{{Route('category.create')}}" class="btn border float-right text-muted text-decoration-none ">Add New Category</a>
-            </div>
-        </div>
+<div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col col-md-7 pt-3 shadow bg-white rounded">
                 <table class="table text-center">
-                    <thead >
+                    <thead class="table-dark">
                         <tr>
                             <th>id</th>
-                            <th>Title</th>
+                            <th>Username</th>
+                            <th>Email</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($category as $value)
+                        @foreach($user as $value)
                             <tr>
                                 <td>{{$value->id}}</td>
-                                <td>{{$value->title}}</td>
+                                <td><a href="{{URL::to('user/detail/'.$value->id)}}">{{$value->name}}</a></td>
+                                <td>{{$value->email}}</td>
                                 <td> 
-                                    <a href="{{URL::to('/category/'.$value->id.'/edit')}}" class="btn btn-success">
-                                        Edit
-                                    </a> 
-                                    <a href="{{URL::to('/del_category/'.$value->id)}}" class="btn btn-danger">
+                                    <a href="{{URL::to('/del_user/'.$value->id)}}" class="btn btn-danger">
                                         Delete
                                     </a> 
                                 </td>
