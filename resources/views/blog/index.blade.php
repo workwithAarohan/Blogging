@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
 
 @section('title')
     Blog
@@ -6,6 +6,9 @@
 
 @section('content')
     <div class="container">
+        <div class="row mb-3">
+        <a href="{{Route('blog.create')}}" class="btn btn-outline-info">Create Blog</a>
+        </div>
         
         @foreach($blog as $value)
             <div class="row justify-content-center pb-4">

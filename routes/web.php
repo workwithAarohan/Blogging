@@ -29,6 +29,10 @@ Route::get('/feedback/delete/{id}','BlogController@destroyFeedback')->name('feed
 
 Route::get('/test','TestController@index')->name('test.index');
 
+Route::get('/user','AdminController@author')->name('admin.author');
+Route::get('/user/detail/{id}','AdminController@detail')->name('admin.author');
+Route::get('/blog','AdminController@blog')->name('blog.index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

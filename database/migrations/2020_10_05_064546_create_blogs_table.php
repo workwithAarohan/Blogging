@@ -17,7 +17,7 @@ class CreateBlogsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('image');
-            $table->string('content');
+            $table->text('content');
             $table->string('description');
             $table->integer('cat_id')->unsigned();
             $table->integer('user_id')->unsigned();

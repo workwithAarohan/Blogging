@@ -28,7 +28,15 @@
                         <label for="image">image</label>
                         <input type="file" class="form-control" value="{{$blog->image}}" id="image" name="image">
                     </div>
-                    <input type="hidden" value="{{$blog->cat_id}}" name="cat_id">
+                    <select name="cat_id">
+                            @foreach($category as $value)
+                                @if($blog->cat_id === $value->id)
+                                <option value="{{$value->id}}" selected>{{$value->title}}</option>
+                                @else
+                                <option value="{{$value->id}}">{{$value->title}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     <input type="hidden" value="{{$blog->user_id}}" name="user_id">
                     <button class="btn btn-success">Edit</button>
                 </form>
