@@ -131,7 +131,8 @@ class BlogController extends Controller
     {
         //
         $blog = Blog::find($id);
-        return View::make('blog.edit')->with('blog', $blog);
+        $category = Category::all();
+        return View::make('blog.edit', compact('blog', 'category'));
     }
 
 
