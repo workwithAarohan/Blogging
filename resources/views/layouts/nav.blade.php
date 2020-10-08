@@ -19,6 +19,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+<<<<<<< HEAD
+=======
+    body
+    {
+        background-color: #E9E8E8;
+    }
+
+>>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
     a:hover{
         text-decoration:none;
     }
@@ -33,7 +41,11 @@
 <body>
     <div class="menu container-fluid">
         <div class="row">
+<<<<<<< HEAD
             <div class="col-3 col-md-2 border p-0">
+=======
+            <div class="border p-0" style="width: 200px;">
+>>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
                 <nav class="navbar navbar-light bg-white justify-content-center">
                 <a class="h3 text-dark" href="/">Blog Admin</a>
                 </nav>
@@ -87,7 +99,11 @@
 
         <main class="container-fluid">
             <div class="row">
+<<<<<<< HEAD
                 <div class="col-3 col-md-2 bg-dark position-sticky p-0 sidebar" style="height:95vh">
+=======
+                <div class="bg-dark position-sticky p-0 sidebar" style="height:95vh; width: 200px;">
+>>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
                     @yield('sidebar')
                 </div>
 

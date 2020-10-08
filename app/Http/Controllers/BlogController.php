@@ -77,11 +77,13 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $feedback = Feedback::where('blog_id',$id)->get(); // SELECT * FROM feedback where blog_id=$id;
         
-        foreach($feedback as $value){
+        foreach($feedback as $value)
+        {
             $user = User::where('id', $value->user_id)->get();
             $value->user = $user;
         }
         return View::make('blog.show',compact('blog', 'feedback'));
+<<<<<<< HEAD
     }
 
     public function storeFeedback(Request $request)
@@ -115,6 +117,41 @@ class BlogController extends Controller
         return Redirect::to('blog/'.$feedback->blog_id);
     }
 
+=======
+    }
+
+    public function storeFeedback(Request $request)
+    {
+        $feedback = new Feedback();
+        $feedback->comment = $request->input('comment');
+        $feedback->blog_id = $request->input('blog_id');
+        $feedback->user_id = $request->input('user_id');
+        $feedback->rating = $request->input('rating');
+
+        $feedback->save();
+        return Redirect::to('blog/'.$feedback->blog_id);
+    }
+
+    public function editFeedback($id)
+    {
+        //
+        $feedback = Feedback::find($id);
+        return View::make('blog/editFeedback')->with('feedback', $feedback);
+    }
+
+    public function updateFeedback(Request $request, $id)
+    {
+        $feedback = Feedback::find($id);
+        $feedback->comment = $request->input('comment');
+        $feedback->blog_id = $request->input('blog_id');
+        $feedback->user_id = $request->input('user_id');
+        $feedback->rating = $request->input('rating');
+
+        $feedback->save();
+        return Redirect::to('blog/'.$feedback->blog_id);
+    }
+
+>>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
     public function destroyFeedback($id){
         $feedback = Feedback::find($id);
         $feedback->delete();
