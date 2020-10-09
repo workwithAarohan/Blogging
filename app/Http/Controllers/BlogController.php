@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Auth;
 use App\Blog;
 use App\User;
 use App\Feedback;
@@ -62,7 +63,7 @@ class BlogController extends Controller
         }
 
         $blog->save();
-        return Redirect::to('blog');
+        return redirect()->back();
     }
 
     /**

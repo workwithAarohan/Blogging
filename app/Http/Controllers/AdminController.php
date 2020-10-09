@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Feedback;
+use App\Category;
 use App\User;
 use App\Blog;
-use App\Feedback;
 use View;
 class AdminController extends Controller
 {
@@ -19,6 +20,7 @@ class AdminController extends Controller
     public function detail($id)
     {
         $user = User::find($id);
+        $category = Category::all();
         $blog = Blog::where('user_id', $id)->get();
         foreach($blog as $value)
         {
@@ -35,7 +37,7 @@ class AdminController extends Controller
         }
         
 
-        return View::make('admin.detail',compact('user', 'blog'));
+        return View::make('admin.detail',compact('user', 'blog', 'category'));
     }
 
     public function blog()

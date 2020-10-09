@@ -6,93 +6,177 @@
     {{$user->name}}
 @endsection
 
-
+<style>
+.fa-star{
+    color:#D3D3D3;
+}
+.fill{
+    color:#FFDF00;
+}
+</style>
 
 @section('content')
     <div class="container mt-3">
         <div class="row p-5 shadow-sm rounded bg-white">
-            <div style="width:90px;">
-                <img src="/image/{{$user->image}}" style="width:90px; border-radius:50%">
+            <div style="width:100px;">
+                <img src="/image/{{$user->image}}" class="border rounded-circle w-100">
             </div>
-            <div class="col-md-6 mt-3">
+            <div class="mt-3 ml-2">
                 <h4>{{$user->name}}</h4>
                 <p>{{$user->email}}</p>
             </div>
         </div>
 
 
-        <div class="row mt-4 justify-content-center">
-            <div class="col-md-5 border mr-4 p-3 shadow-sm bg-white rounded"
-            style="height: 500px;">
+        <div class="row mt-4 d-flex">
+            <div class="border p-3 mr-2 shadow-sm bg-white rounded sticky-top" style="height:85vh;width:45%;">
 
                 <h4>My Collection</h4>
-                <div class="row justify-content-around">
-                @foreach($blog as $value)
-                    <div class="col-md-3 mb-2 border">
-                        <img src="/image/{{$value->image}}" style="width: 110px; height: 120px;">
-                    </div>
-                @endforeach
-                </div>
-            </div>
-                
-            
-            <div class="col-md-6 " style="height:610px; overflow-x: hidden;
-            scrollbar-display:none;">
-
-
-            <div class="row mb-3 p-3 border shadow-sm bg-white rounded border-radius: 50%;">
-                <h4>Write a blog</h4>
-                <a href="{{Route('blog.create')}}" class="btn border rounded" style="width: 100%; height: 40px; text-align:left;
-                background-color: lightgrey; border-radius: 30%">
-                    Create a blog
-                </a>
-            </div>
-            @foreach($blog as $value)
-            <div class="row justify-content-center pb-4 mt-4 border shadow-sm bg-white rounded">
-                
-
-                <div class="col p-3">    
-                    <h3> <b>{{$value->title}}</b> </h3>
-                    <p style="font-size: 20px;"> {{$value->description}} </p>      
-                    <a href="{{URL::to('/blog/'.$value->id)}}">
-                        <img src="/image/{{$value->image}}" class="w-100 mb-3"> 
-                    </a>
-                    <hr>
-                    <div class="d-flex border-bottom justify-content-between">
-                        <h5 >Comments</h5>
-                        <p>{{$review->where('blog_id',$value->id)->count()}} comments</p>
-                    </div>
-                    @foreach($value->feedback as $feedback)
-                        @foreach($feedback->user as $user)
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="/image/{{$user->image}}" style="width:50px; height:50px; border-radius:50%;">
-                                </div>
-                                <div class="col mt-2 ">
-                                    <b> {{$user->name}} </b> Rating: {{$feedback->rating}}
-                                    <p> {{$feedback->comment}} </p>
-                                </div>
-                            </div>
-                        @endforeach
+                <div class="row">
+                    @foreach($blog as $value)
+                        <div class="m-1 border">
+                            <img src="/image/{{$value->image}}" width="159px" height="130px">
+                        </div>
                     @endforeach
                 </div>
-
-                <!-- <div class="col">
-                    <h3> {{$value->title}} </h3> 
-                    <p> {{$value->description}} </p>
-                    <a href="{{URL::to('/blog/'.$value->id.'/edit')}}" class="btn btn-success mr-1">
-                        Edit
-                    </a> 
-                    <a href="{{URL::to('/del_blog/'.$value->id)}}" class="btn btn-danger">
-                        Delete
-                    </a> 
-                </div> -->
             </div>
-        @endforeach
+                    
+                
+            <div style="width:51%;margin-left:1.5rem;">
+                <div class="row mb-3 p-4 shadow-sm bg-white rounded">
+                    <h4>Write a blog</h4>
+                    <button type="button" class="btn border rounded-pill text-muted" data-toggle="modal" data-target="#createblog" style="width: 100%; height: 40px; text-align:left;
+                    background-color: lightgrey; border-radius: 30%">
+                    Create a blog
+                    </button>
+
+                    <div class="modal fade" id="createblog" tabindex="-1" aria-labelledby="createblog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create blog</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{URL::to('blog')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">Content</label>
+                                        <textarea class="form-control" id="description" name="content"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input type="text" class="form-control" id="content" name="description">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">image</label>
+                                        <input type="file" class="form-control" id="image" name="image">
+                                    </div>
+                                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <select name="cat_id">
+                                            @foreach($category as $value)
+                                                <option value="{{$value->id}}">{{$value->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button class="btn btn-success" type="submit">Add</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                @foreach($blog as $value)
+                    <div class="row justify-content-center pb-4 mt-4 border shadow-sm bg-white rounded">
+                        
+
+                        <div class="col p-3">    
+                            <h3 class="mb-0"> <b>{{$value->title}}</b></h3>
+                            <small class="text-muted">{{$value->created_at->format('d-M-Y, h:i A')}}</small>
+                            <p style="font-size: 18px;margin:0.5rem 0"> {{$value->description}}</p>      
+                            <a href="{{URL::to('/blog/'.$value->id)}}">
+                                <img src="/image/{{$value->image}}" class="w-100 mb-2"> 
+                            </a>
+                            <hr>
+                            <div class="d-flex border-bottom justify-content-between">
+                                <p class="h5">Comments</p>
+                                <a class="btn p-0" data-toggle="modal" data-target="#showcomment">
+                                {{$review->where('blog_id',$value->id)->count()}} comments
+                                </a>
+                                <div class="modal fade" id="showcomment" tabindex="-1" aria-labelledby="commentlist" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Comments</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    @foreach($value->feedback as $feedback)
+                                        @foreach($feedback->user as $user)
+                                        <div class="row mt-2 border-bottom">
+                                            <div class="p-2 ml-3">
+                                                <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:45px;height:45px;">
+                                            </div>
+                                            <div class="mt-2">
+                                                <b>{{$user->name}}</b>
+                                                <span class="ml-1">(
+                                                @for($i=1;$i<=5;$i++)
+                                                    @if($i <= $feedback->rating)
+                                                        <i class="fa fa-star fill"></i>
+                                                    @else
+                                                        <i class="fa fa-star"></i>
+                                                    @endif
+                                                @endfor)
+                                                </span>
+                                                <p> {{$feedback->comment}} </p>
+                                            </div>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach($value->feedback as $feedback)
+                                @foreach($feedback->user as $user)
+                                    <div class="row mt-2 border-bottom">
+                                        <div class="p-2 ml-3">
+                                            <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:45px;height:45px;">
+                                        </div>
+                                        <div class="mt-2">
+                                            <b>{{$user->name}}</b>
+                                            <span class="ml-1">(
+                                            @for($i=1;$i<=5;$i++)
+                                                @if($i <= $feedback->rating)
+                                                    <i class="fa fa-star fill"></i>
+                                                @else
+                                                    <i class="fa fa-star"></i>
+                                                @endif
+                                            @endfor)
+                                            </span>
+                                            <p> {{$feedback->comment}} </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
-
-        
-
     </div>
 @endsection

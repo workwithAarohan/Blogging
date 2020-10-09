@@ -8,16 +8,41 @@
 @section('content')
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col col-md-7 mb-4">
-                <a href="{{Route('category.create')}}" class="btn border float-right text-muted text-decoration-none ">Add New Category</a>
+            <div class="col col-md-9 mb-4">
+                <button type="button" class="btn btn-outline-info float-right rounded" data-toggle="modal" data-target="#createcat">
+                Add New Category
+                </button>
+
+                <div class="modal fade" id="createcat" tabindex="-1" aria-labelledby="addcategory" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Category</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="{{URL::to('category')}}" method="POST" class="form-group">
+                                @csrf 
+                                <label for="">Title</label>
+                                <input type="text" name="title" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Add</button>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col col-md-7 pt-3 shadow bg-white rounded">
+            <div class="col col-md-9 pt-3 shadow bg-white rounded">
                 <table class="table text-center">
                     <thead >
                         <tr>
-                            <th>id</th>
+                            <th>Id</th>
                             <th>Title</th>
                             <th>Action</th>
                         </tr>
@@ -40,6 +65,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
         </div>
     </div>
 @endsection
