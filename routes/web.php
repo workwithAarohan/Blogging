@@ -31,11 +31,7 @@ Route::get('/test','TestController@index')->name('test.index');
 
 Route::get('/user','AdminController@author')->name('admin.author');
 Route::get('/user/detail/{id}','AdminController@detail')->name('admin.author');
-<<<<<<< HEAD
-Route::get('/blog','AdminController@blog')->name('blog.index');
-=======
 // Route::get('/blog','AdminController@blog')->name('blog.index');
->>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
 
 Auth::routes();
 

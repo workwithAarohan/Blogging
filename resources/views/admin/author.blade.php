@@ -7,14 +7,15 @@
 @section('content')
 <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col col-md-7 pt-3 shadow bg-white rounded">
+            <div class="col pt-3 shadow bg-white rounded">
                 <table class="table text-center">
                     <thead class="table-dark">
                         <tr>
-                            <th>id</th>
+                            <th>Id</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Action</th>
+                            <th>Blogs</th>
+                            <th>Rating</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,11 +24,8 @@
                                 <td>{{$value->id}}</td>
                                 <td><a href="{{URL::to('user/detail/'.$value->id)}}">{{$value->name}}</a></td>
                                 <td>{{$value->email}}</td>
-                                <td> 
-                                    <a href="{{URL::to('/del_user/'.$value->id)}}" class="btn btn-danger">
-                                        Delete
-                                    </a> 
-                                </td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforeach
                     </tbody>

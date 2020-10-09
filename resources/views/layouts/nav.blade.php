@@ -19,14 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-<<<<<<< HEAD
-=======
     body
     {
         background-color: #E9E8E8;
     }
 
->>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
     a:hover{
         text-decoration:none;
     }
@@ -36,24 +33,19 @@
     .sidebar li a{
         color:#FFFFFF;
     }
+    .blog {
+        -ms-overflow-style: none; 
+    }
+    .blog::-webkit-scrollbar { 
+        display: none;
+    }
     </style>
 </head>
 <body>
-    <div class="menu container-fluid">
-        <div class="row">
-<<<<<<< HEAD
-            <div class="col-3 col-md-2 border p-0">
-=======
-            <div class="border p-0" style="width: 200px;">
->>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
-                <nav class="navbar navbar-light bg-white justify-content-center">
-                <a class="h3 text-dark" href="/">Blog Admin</a>
-                </nav>
-            </div>
-
-            <div class="col-9 col-md-10 p-0">
+    <div class="menu container-fluid p-0">
                 <div id="app">
                     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                    <a class="navbar-brand" href="/">Blog Admin</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -92,25 +84,16 @@
                             </ul>
                         </div>
                     </nav>
-                </div>
             </div>
-        </div>
     </div>
 
-        <main class="container-fluid">
-            <div class="row">
-<<<<<<< HEAD
-                <div class="col-3 col-md-2 bg-dark position-sticky p-0 sidebar" style="height:95vh">
-=======
-                <div class="bg-dark position-sticky p-0 sidebar" style="height:95vh; width: 200px;">
->>>>>>> 7c94d9f0a202a8e7353c8909c2169a9c8469432a
+        <main class="container-fluid d-flex flex-grow-1 p-0">
+            <div class="bg-dark p-0 sidebar mr-2" style="min-height:94.1vh;max-height:95vh;max-width:200px;min-width:200px;left:0;">
                     @yield('sidebar')
                 </div>
-
-                <div class="col-9 col-md-10 py-2">
+                <div class="py-2 border blog" style="width:calc(100% - 200px);min-height:94.1vh;max-height:95vh;overflow:scroll;">
                     @yield('content')
                 </div>
-            </div>
         </main>
     </div>
 </body>

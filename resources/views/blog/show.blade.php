@@ -4,33 +4,66 @@
     {{$blog->title}}
 @endsection
 
+<style>
+.rating { 
+    border: none;
+    float: left;
+}
+
+.rating > input { 
+    display: none; 
+} 
+.rating > label:before { 
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+.rating > label { 
+    color: #D3D3D3; 
+    float: right; 
+}
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+     color: #FFDF00;
+}
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label { 
+    color: #FFED85;  
+}
+</style>
+
 @section('content')
     <div class="container">
         
         <h3> {{$blog->title}} </h3>
 
-        <img src="/image/{{$blog->image}}" class="w-75">
+        <img src="/image/{{$blog->image}}" class="w-75 mb-3">
 
         <p> {{$blog->content}} </p>
 
-        <div class="row p-3 mb-3">
+        <div class="row p-3 mb-3 border-top">
             @auth 
                 <div class="col-md-1">
-                    <img src="/image/{{Auth::user()->image}}" style="width:50px; height:50px; border-radius:50%;">
+                    <img src="/image/{{Auth::user()->image}}" class="mt-4 ml-2 border rounded-circle" style="width:60px;height:60px;">
                 </div>
                 <div class="col-md-6">
                     <form action="{{URL::to('feedback/store')}}" method="POST">
                         @csrf
                         <input type="hidden" name="blog_id" value="{{$blog->id}}">
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                        <input type="text" class="form-control" name="comment" placeholder="Add a comment" required>
-                        <select name="rating">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                        <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                        </div>
+                        <input type="text" class="form-control mb-1" name="comment" placeholder="Add a comment" required>
                         <button type="submit" class="btn border">Add Review <i class="fas fa-plus"></i></button>
                     </form>
                 </div>
@@ -41,7 +74,7 @@
             @endauth
         </div>
         @foreach($feedback as $value)
-            <div class="row p-3 bg-light mb-2">
+            <div class="row p-3 bg-light mb-2 border-top">
                 @foreach($value->user as $user)
                     <div class="col-md-8">
                         <a href="{{URL::to('profile/'.$user->image)}}" style="text-decoration: none;"> 
