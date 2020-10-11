@@ -13,6 +13,29 @@
 .fill{
     color:#FFDF00;
 }
+.gallery{
+    height:85vh;
+    width:45%;
+    position: sticky;
+    top:0;
+}
+.blogs{
+    width:51%;
+    margin-left:1.5rem;
+}
+@media only screen and (max-width:1000px){
+    .gallery{
+        width:100%;
+        position:static;
+    }
+    .blogs{
+        width:100%;
+        margin-left:0;
+    }
+    .create{
+        margin-top:20px;
+    }
+}
 </style>
 
 @section('content')
@@ -29,7 +52,7 @@
 
 
         <div class="row mt-4 d-flex">
-            <div class="border p-3 mr-2 shadow-sm bg-white rounded sticky-top" style="height:85vh;width:45%;">
+            <div class="border p-3 mr-2 shadow-sm bg-white rounded gallery">
 
                 <h4>My Collection</h4>
                 <div class="row">
@@ -42,8 +65,8 @@
             </div>
                     
                 
-            <div style="width:51%;margin-left:1.5rem;">
-                <div class="row mb-3 p-4 shadow-sm bg-white rounded">
+            <div class="blogs">
+                <div class="row mb-3 p-4 shadow-sm bg-white rounded create">
                     <h4>Write a blog</h4>
                     <button type="button" class="btn border rounded-pill text-muted" data-toggle="modal" data-target="#createblog" style="width: 100%; height: 40px; text-align:left;
                     background-color: lightgrey; border-radius: 30%">
