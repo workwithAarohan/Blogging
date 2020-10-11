@@ -40,6 +40,8 @@ class AdminController extends Controller
         {
             $feedback = Feedback::where('blog_id',$value->id)->get();
             $average = round(Feedback::where('blog_id',$value->id)->avg('rating'));
+            $comment = Feedback::where('blog_id',$value->id)->limit(2)->get();
+            $value->comment = $comment;
             $value->feedback = $feedback;
             $value->average = $average;
             
@@ -47,6 +49,11 @@ class AdminController extends Controller
             {
                 $users = User::where('id',$feedbacks->user_id)->get();
                 $feedbacks->user = $users;
+            }
+            foreach($comment as $comments)
+            {
+                $users = User::where('id',$comments->user_id)->get();
+                $comments->user = $users;
             }
                 
         }

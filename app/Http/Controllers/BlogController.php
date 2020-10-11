@@ -33,7 +33,7 @@ class BlogController extends Controller
     public function create()
     {
         //
-        $category = Category::all();                   //Select * from categories;
+        $category = Category::all();                //Select * from categories;
         return View::make('blog.create')->with('category',$category);
     }
 

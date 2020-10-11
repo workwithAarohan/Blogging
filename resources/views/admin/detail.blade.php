@@ -19,8 +19,8 @@
     grid-gap:10px;
 }
 .blogs{
-    width:52%;
-    margin-left:10px;
+    width:51%;
+    margin-left:20px;
 }
 .fa-ellipsis-v{
     color:#B4B4B4;
@@ -56,23 +56,34 @@
 </style>
 
 @section('content')
-    <div class="container mt-2">
-        <div class="row p-3 p-md-5 shadow-sm rounded bg-white m-0">
-            <div class="col-md-2 text-center">
-                <img src="/image/{{$user->image}}" class="border rounded-circle w-100" style="width:100px;">
-                @for($i=1;$i<=5;$i++)
-                @if($i <= $user->average)
-                    <i class="fa fa-star fill"></i>
-                @else
-                    <i class="fa fa-star"></i>
-                @endif
-            @endfor
+    <div class="container-fluid mt-2">
+        <div class="row p-3 p-md-5 shadow-sm rounded bg-white m-0 text-center">
+            <div class="col-md-2 ">
+                <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:100px;">
+                
             </div>
-            <div class="col-md-5 mt-2">
-                <h4>{{$user->name}}</h4>
+            <div class="col-md-3 mt-2">
+                <h4><b>{{$user->name}}</b></h4>
                 <p>{{$user->email}}</p>
-                <h4>Total Blogs : <span class="badge badge-secondary">{{$blog->count}}</span></h4>
-                <h4>Total review : <span class="badge badge-secondary">{{$user->rating}}</span></h4>
+            </div>
+            <div class="col-md-3 offset-md-1 justify-content-center">
+                <h4>Total Blogs : <br> 
+                    <span class="badge badge-primary" style="padding-top: 25px; text-align:center; width: 7rem; height: 5rem; font-size: 2.4rem; ">
+                       {{$blog->count}}
+                    </span>
+                </h4>
+            </div>
+            <div class="col-md-3 ">
+                <h3><b>Overall Rating</b></h3>
+                @for($i=1;$i<=5;$i++)
+                    @if($i <= $user->average)
+                        <i class="fa fa-star fill" style="font-size: 1.5rem;"></i>
+                    @else
+                        <i class="fa fa-star" style="font-size: 1.5rem;"></i>
+                    @endif
+                @endfor
+                <hr>
+                <h5>Total review : <span class="badge badge-secondary">{{$user->rating}}</span></h5>
             </div>
         </div>
 
@@ -83,7 +94,7 @@
                 <div class="row gallery-img">
                     @foreach($blog as $value)
                         <div class="border">
-                            <img src="/image/{{$value->image}}" class="img-fluid">
+                            <img src="/image/{{$value->image}}" title="{{$value->title}}" class="img-fluid">
                         </div>
                     @endforeach
                 </div>
@@ -211,8 +222,8 @@
                                     </div>
                                 </div>
                             </div>
-                            @foreach($value->feedback as $feedback)
-                                @foreach($feedback->user as $user)
+                            @foreach($value->comment as $comment)
+                                @foreach($comment->user as $user)
                                     <div class="row mt-2 border-bottom">
                                         <div class="p-2 ml-3">
                                             <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:45px;height:45px;">
