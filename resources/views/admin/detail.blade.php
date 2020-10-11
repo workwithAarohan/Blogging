@@ -1,11 +1,8 @@
 @extends('layouts.sidebar')
-
 @inject('review','App\Feedback')
-
 @section('title')
     {{$user->name}}
 @endsection
-
 <style>
 .fa-star{
     color:#D3D3D3;
@@ -81,7 +78,6 @@
                     background-color: lightgrey; border-radius: 30%">
                     Create a blog
                     </button>
-
                     <div class="modal fade" id="createblog" tabindex="-1" aria-labelledby="createblog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
