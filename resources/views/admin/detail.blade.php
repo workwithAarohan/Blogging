@@ -18,15 +18,21 @@
     width:45%;
     position: sticky;
     top:0;
+    margin-right:0.5rem;
+    overflow:hidden;
+}
+.gallery-img{
+    margin:3.8px;
 }
 .blogs{
     width:51%;
     margin-left:1.5rem;
 }
-@media only screen and (max-width:1000px){
+@media only screen and (max-width:992px){
     .gallery{
         width:100%;
         position:static;
+        margin-right:0;
     }
     .blogs{
         width:100%;
@@ -34,6 +40,9 @@
     }
     .create{
         margin-top:20px;
+    }
+    .gallery-img{
+
     }
 }
 </style>
@@ -52,13 +61,13 @@
 
 
         <div class="row mt-4 d-flex">
-            <div class="border p-3 mr-2 shadow-sm bg-white rounded gallery">
+            <div class="border p-3 shadow-sm bg-white rounded gallery">
 
                 <h4>My Collection</h4>
                 <div class="row">
                     @foreach($blog as $value)
-                        <div class="m-1 border">
-                            <img src="/image/{{$value->image}}" width="159px" height="130px">
+                        <div class="border gallery-img">
+                            <img src="/image/{{$value->image}}" width="160px" height="130px">
                         </div>
                     @endforeach
                 </div>
