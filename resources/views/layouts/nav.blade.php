@@ -39,6 +39,12 @@
     .blog::-webkit-scrollbar { 
         display: none;
     }
+    .fa-star{
+    color:#D3D3D3;
+}
+    .fill{
+        color:#FFDF00;
+    }
     </style>
 </head>
 <body>
