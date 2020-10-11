@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Blog;
-use App\Feedback;
 use Auth;
+use App\Feedback;
+use App\Category;
+use App\User;
+use App\Blog;
+use View;
 
 class HomeController extends Controller
 {
@@ -26,11 +29,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blog = Blog::where('user_id',Auth::user()->id)->count();
-        $rating = Feedback::where('user_id',Auth::user()->id)->count();
-        
-        $average = round(Feedback::where('user_id',Auth::user()->id)->avg('rating'));
+        $user = User::all();
+        $user->count = User::count();
 
-        return view('home',compact('blog','rating','average'));
+        $blog_count = Blog::count();
+
+        foreach($user as $value)
+        {
+            $blog = Blog::where('user_id',$value->id)->count();
+            $value->blog = $blog;
+            $average = round(Feedback::where('user_id',$value->id)->avg('rating'));
+            $value->rating = $average;
+        }
+
+        return View::make('admin.author',compact('user','blog_count'));
     }
 }

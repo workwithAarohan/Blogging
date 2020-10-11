@@ -9,7 +9,7 @@
         
         @foreach($blog as $value)
             <div class="row justify-content-center p-4 my-4 bg-white shadow-sm rounded">
-                <div class="col">          
+                <div class="col-md-5">          
                     <a href="{{URL::to('/blog/'.$value->id)}}">
                         <img src="/image/{{$value->image}}" class="w-100"> 
                     </a>
