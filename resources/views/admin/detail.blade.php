@@ -4,12 +4,6 @@
     {{$user->name}}
 @endsection
 <style>
-.fa-star{
-    color:#D3D3D3;
-}
-.fill{
-    color:#FFDF00;
-}
 .gallery{
     height:85vh;
     width:45%;
@@ -19,11 +13,23 @@
     overflow:hidden;
 }
 .gallery-img{
-    margin:3.8px;
+    padding:10px;
+    display:grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:10px;
 }
 .blogs{
-    width:51%;
-    margin-left:0.9rem;
+    width:52%;
+    margin-left:10px;
+}
+.fa-ellipsis-v{
+    color:#B4B4B4;
+    transition: 0.2s all;
+}
+.fa-ellipsis-v:hover{
+    transform: scale(1.5);
+    color:#000000;
+    cursor:pointer;
 }
 @media only screen and (max-width:992px){
     .gallery{
@@ -39,34 +45,51 @@
         margin-top:20px;
     }
     .gallery-img{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+@media only screen and (max-width:600px){
+    .gallery-img{
+        grid-template-columns: 1fr 1fr;
     }
 }
 </style>
+
 @section('content')
     <div class="container mt-2">
-        <div class="row p-5 shadow-sm rounded bg-white" style="width: 102.2%;">
-            <div style="width:100px;">
-                <img src="/image/{{$user->image}}" class="border rounded-circle w-100">
+        <div class="row p-3 p-md-5 shadow-sm rounded bg-white m-0">
+            <div class="col-md-2 text-center">
+                <img src="/image/{{$user->image}}" class="border rounded-circle w-100" style="width:100px;">
+                @for($i=1;$i<=5;$i++)
+                @if($i <= $user->average)
+                    <i class="fa fa-star fill"></i>
+                @else
+                    <i class="fa fa-star"></i>
+                @endif
+            @endfor
             </div>
-            <div class="mt-3 ml-2">
+            <div class="col-md-5 mt-2">
                 <h4>{{$user->name}}</h4>
                 <p>{{$user->email}}</p>
+                <h4>Total Blogs : <span class="badge badge-secondary">{{$blog->count}}</span></h4>
+                <h4>Total review : <span class="badge badge-secondary">{{$user->rating}}</span></h4>
             </div>
         </div>
 
-        <div class="row mt-3 d-flex">
+        <div class="row m-0 mt-3">
             <div class="border p-3 shadow-sm bg-white rounded gallery">
+
                 <h4>My Collection</h4>
-                <div class="row">
+                <div class="row gallery-img">
                     @foreach($blog as $value)
-                        <div class="border gallery-img">
-                            <img src="/image/{{$value->image}}" width="150px" height="130px">
+                        <div class="border">
+                            <img src="/image/{{$value->image}}" class="img-fluid">
                         </div>
                     @endforeach
                 </div>
             </div>
-
                     
+                
             <div class="blogs">
                 @if($user->id == Auth::user()->id)
                     <div class="row mb-3 p-4 shadow-sm bg-white rounded create">
@@ -130,10 +153,17 @@
                     <div class="row justify-content-center pb-4 mb-3 border shadow-sm bg-white rounded">
 
                         
+
                         <div class="col p-3">    
-                            <h3 class="mb-0"> <b>{{$value->title}}</b></h3>
-                            <small class="text-muted">{{$value->created_at->format('d-M-Y, h:i A')}}</small>
-                            Rating: {{$value->average}}
+                            <h3 class="mb-0"> <b>{{$value->title}}</b> <span class="h5 float-right"><i class="fa fa-ellipsis-v"></i></span></h3>
+                            <small class="text-muted">{{$value->created_at->format('d-M-Y, h:i A')}}</small>&nbsp;
+                            @for($i=1;$i<=5;$i++)
+                                @if($i <= $value->average)
+                                    <i class="fa fa-star fill"></i>
+                                @else
+                                    <i class="fa fa-star"></i>
+                                @endif
+                            @endfor
                             <p style="font-size: 18px;margin:0.5rem 0"> {{$value->description}}</p>      
                             <a href="{{URL::to('/blog/'.$value->id)}}">
                                 <img src="/image/{{$value->image}}" class="w-100 mb-2"> 
@@ -141,10 +171,10 @@
                             <hr>
                             <div class="d-flex border-bottom justify-content-between">
                                 <p class="h5">Comments</p>
-                                <a class="btn p-0" data-toggle="modal" data-target="#showcomment">
+                                <a class="btn p-0" data-toggle="modal" data-target="#showcomment{{$value->id}}">
                                 {{$review->where('blog_id',$value->id)->count()}} comments
                                 </a>
-                                <div class="modal fade" id="showcomment" tabindex="-1" aria-labelledby="commentlist" aria-hidden="true">
+                                <div class="modal fade" id="showcomment{{$value->id}}" tabindex="-1" aria-labelledby="commentlist" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                     <div class="modal-header">
@@ -210,3 +240,4 @@
         </div>
     </div>
 @endsection
+

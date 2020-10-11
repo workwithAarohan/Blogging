@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
 
 @section('title')
     {{$blog->title}}
@@ -46,7 +46,7 @@
 
         <p> {{$blog->content}} </p>
 
-        <div class="row p-3 mb-3 border-top">
+        <div class="row p-3 mb-3 border-top bg-white">
             @auth 
                 <div class="col-md-1">
                     <img src="/image/{{Auth::user()->image}}" class="mt-4 ml-2 border rounded-circle" style="width:60px;height:60px;">
@@ -77,13 +77,27 @@
             <div class="row p-3 bg-light mb-2 border-top">
                 @foreach($value->user as $user)
                     <div class="col-md-8">
-                        <a href="{{URL::to('profile/'.$user->image)}}" style="text-decoration: none;"> 
-                            {{$user->name}} &ensp;&emsp;
-                        </a>
-                        <br>
-                        <p>{{$value->comment}}</p>
+                    <div class="row">
+                        <div class="p-2 ml-3">
+                            <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:45px;height:45px;">
+                        </div>
+                        <div class="mt-2">
+                            <b>{{$user->name}}</b>
+                            <span class="ml-1">(
+                            @for($i=1;$i<=5;$i++)
+                                @if($i <= $value->rating)
+                                    <i class="fa fa-star fill"></i>
+                                @else
+                                    <i class="fa fa-star"></i>
+                                @endif
+                            @endfor)
+                            </span>
+                            <p> {{$value->comment}} </p>
+                        
                         <a href="{{URL::to('/feedback/edit/'.$value->id)}}" class="border-right pr-2 mr-2">Edit</a>
                         <a href="{{URL::to('/feedback/delete/'.$value->id)}}">Delete</a>
+                        </div>
+                        </div>
                     </div>
                 @endforeach
             </div>

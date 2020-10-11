@@ -50,6 +50,9 @@ class AdminController extends Controller
             }
                 
         }
+        $blog->count = Blog::where('user_id', $id)->count();
+        $user->rating = Feedback::where('user_id',$id)->count();        
+        $user->average = round(Feedback::where('user_id',$id)->avg('rating'));
         
         return View::make('admin.detail',compact('user', 'blog', 'category'));
     }
