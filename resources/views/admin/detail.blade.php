@@ -45,6 +45,7 @@
 
     }
 }
+
 </style>
 
 @section('content')
@@ -62,20 +63,25 @@
 
         <div class="row mt-4 d-flex">
             <div class="border p-3 shadow-sm bg-white rounded gallery">
+            <div class="border p-3 mr-2 shadow-sm bg-white rounded sticky-top" style="height:85vh;width:45%;">
 
                 <h4>My Collection</h4>
                 <div class="row">
                     @foreach($blog as $value)
                         <div class="border gallery-img">
                             <img src="/image/{{$value->image}}" width="160px" height="130px">
+                        <div class="m-1 border">
+                            <img src="/image/{{$value->image}}" width="159px" height="130px">
                         </div>
                     @endforeach
                 </div>
             </div>
                     
-                
+
             <div class="blogs">
                 <div class="row mb-3 p-4 shadow-sm bg-white rounded create">
+            <div style="width:51%;margin-left:1.5rem;">
+                <div class="row mb-3 p-4 shadow-sm bg-white rounded">
                     <h4>Write a blog</h4>
                     <button type="button" class="btn border rounded-pill text-muted" data-toggle="modal" data-target="#createblog" style="width: 100%; height: 40px; text-align:left;
                     background-color: lightgrey; border-radius: 30%">
@@ -90,6 +96,37 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{URL::to('blog')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">Content</label>
+                                        <textarea class="form-control" id="description" name="content"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input type="text" class="form-control" id="content" name="description">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">image</label>
+                                        <input type="file" class="form-control" id="image" name="image">
+                                    </div>
+                                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <select name="cat_id">
+                                            @foreach($category as $value)
+                                                <option value="{{$value->id}}">{{$value->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 </div>
                                 <div class="modal-body">
                                     <form action="{{URL::to('blog')}}" method="POST" enctype="multipart/form-data">
