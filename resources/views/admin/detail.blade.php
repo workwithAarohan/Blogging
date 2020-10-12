@@ -38,8 +38,8 @@
         margin-right:0;
     }
     .blogs{
-        width:100%;
-        margin-left:0;
+        width:95%;
+        margin-left:15px;        
     }
     .create{
         margin-top:20px;
@@ -58,7 +58,7 @@
 @section('content')
     <div class="container-fluid mt-2">
         <div class="row p-3 p-md-5 shadow-sm rounded bg-white m-0 text-center">
-            <div class="col-md-2 ">
+            <div class="col-md-2">
                 <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:100px;">
                 
             </div>
