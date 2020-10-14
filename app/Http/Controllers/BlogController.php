@@ -180,6 +180,6 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $blog->delete();
 
-        return Redirect::to('blog');
+        return redirect()->back();
     }
 }

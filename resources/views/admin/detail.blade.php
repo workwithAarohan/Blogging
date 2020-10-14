@@ -93,8 +93,11 @@
                 <h4>My Collection</h4>
                 <div class="row gallery-img">
                     @foreach($blog as $value)
-                        <div class="border">
-                            <img src="/image/{{$value->image}}" title="{{$value->title}}" class="img-fluid">
+                        <div class="border text-center">
+                            <a href="{{URL::to('/blog/'.$value->id)}}">
+                                <img src="/image/{{$value->image}}" title="{{$value->title}}" class="img-fluid" 
+                                style="height: 100px;" >
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -163,10 +166,17 @@
                 @foreach($blog as $value)
                     <div class="row justify-content-center pb-4 mb-3 border shadow-sm bg-white rounded">
 
-                        
-
                         <div class="col p-3">    
-                            <h3 class="mb-0"> <b>{{$value->title}}</b> <span class="h5 float-right"><i class="fa fa-ellipsis-v"></i></span></h3>
+                            <h3 class="mb-0"> <b>{{$value->title}}</b> 
+                            <span class="h5 float-right">
+                                <div class="dropdown dropleft float-right">
+                                    <i class="fa fa-ellipsis-v" type="button" dropdown-toggle" data-toggle="dropdown"></i>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{URL::to('blog/'.$value->id . '/edit')}}">Edit</a>
+                                        <a class="dropdown-item" href="{{URL::to('/del_blog/'.$value->id)}}">Delete</a>
+                                    </div>
+                                </div>
+                            </span></h3>
                             <small class="text-muted">{{$value->created_at->format('d-M-Y, h:i A')}}</small>&nbsp;
                             @for($i=1;$i<=5;$i++)
                                 @if($i <= $value->average)
