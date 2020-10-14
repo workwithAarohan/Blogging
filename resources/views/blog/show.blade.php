@@ -64,7 +64,7 @@
                         <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
                         </div>
                         <input type="text" class="form-control mb-1" name="comment" placeholder="Add a comment" required>
-                        <button type="submit" class="btn border">Add Review <i class="fas fa-plus"></i></button>
+                        <button type="submit" class="btn border">Add Review</button>
                     </form>
                 </div>
             @else
