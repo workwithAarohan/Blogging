@@ -5,14 +5,14 @@
 @endsection
 
 @section('content')
-    <div class="container   ">
-        <h4 class="mt-1"> <b>Recent Blogs:</b></h4>
+    <div class="container-fluid px-5">
+        <h4 class="mt-1"><b>Recent Blogs:</b></h4>
         @foreach($recent as $value)
             @foreach($value->category as $category)
-                <div class="row justify-content-center p-4 my-4 bg-white shadow-sm rounded ml-5 w-75">
-                    <div class="col-md-5">
+                <div class="row p-4 my-4 bg-white shadow-sm rounded">
+                    <div class="col-md-5 text-center">
                         <a href="{{URL::to('/blog/'.$value->id)}}">
-                            <img src="/image/{{$value->image}}" class="w-100" style="height: 160px;"> 
+                            <img src="/image/{{$value->image}}" class="img-fluid" style="max-height:200px;"> 
                         </a>
                     </div>
                     <div class="col-md-7">
@@ -39,10 +39,10 @@
         <h4 class="mt-1"> <b>Top Rated:</b></h4>
         @foreach($blog_topRated as $value)
             @foreach($value->category as $category)
-                <div class="row justify-content-center p-4 my-4 bg-white shadow-sm rounded ml-5 w-75">
-                    <div class="col-md-5">
+            <div class="row p-4 my-4 bg-white shadow-sm rounded">
+                    <div class="col-md-5 text-center">
                         <a href="{{URL::to('/blog/'.$value->id)}}">
-                            <img src="/image/{{$value->image}}" class="w-100" style="height: 160px;"> 
+                            <img src="/image/{{$value->image}}" class="img-fluid" style="max-height:250px;"> 
                         </a>
                     </div>
                     <div class="col">
