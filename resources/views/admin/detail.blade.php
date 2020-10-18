@@ -185,7 +185,7 @@
                                     <i class="fa fa-star"></i>
                                 @endif
                             @endfor
-                            <p style="font-size: 18px;margin:0.5rem 0"> {{$value->description}}</p>      
+                            <p style="font-size: 15px;margin:0.5rem 0"> {{$value->description}}</p>      
                             <a href="{{URL::to('/blog/'.$value->id)}}">
                                 <img src="/image/{{$value->image}}" class="w-100 mb-2"> 
                             </a>
@@ -236,7 +236,9 @@
                                 @foreach($comment->user as $user)
                                     <div class="row mt-2 border-bottom">
                                         <div class="p-2 ml-3">
-                                            <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:45px;height:45px;">
+                                            <a href="{{URL::to('/user/detail/'.$user->id)}}">
+                                                <img src="/image/{{$user->image}}" class="border rounded-circle" style="width:45px;height:45px;">
+                                            </a>
                                         </div>
                                         <div class="mt-2">
                                             <b>{{$user->name}}</b>

@@ -23,6 +23,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::all();   //Select * from categories;
+        $category->count = $category->count();
         return View::make('category.index')->with('category',$category);
     }
 
