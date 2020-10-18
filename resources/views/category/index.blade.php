@@ -59,7 +59,7 @@
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->title}}</td>
                                 <td> 
-                                    <a href="{{URL::to('/category/'.$value->id.'/edit')}}" class="btn btn-success">
+                                    <a class="btn btn-success rounded" data-toggle="modal" data-target="#editcat{{$value->id}}">
                                         Edit
                                     </a> 
                                     <a href="{{URL::to('/del_category/'.$value->id)}}" class="btn btn-danger">
@@ -67,6 +67,29 @@
                                     </a> 
                                 </td>
                             </tr>
+
+                            <div class="modal fade" id="editcat{{$value->id}}" tabindex="-1" aria-labelledby="editcategory" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Add Category</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <form action="{{URL::to('category/'.$value->id)}}" method="POST" class="form-group">
+                                            @csrf @method('PUT')
+                                            <label for="">Title</label>
+                                            <input type="text" name="title" value="{{$value->title}}" class="form-control">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Edit</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>

@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="container   ">
+    <div class="container-fluid px-5">
         <h4 class="mt-1"> <b> {{$blog->catTitle}} </b></h4>
         @foreach($blog as $value)
-            <div class="row justify-content-center p-4 my-4 bg-white shadow-sm rounded ml-5 w-75">
-                <div class="col-md-5">
+        <div class="row p-4 my-4 bg-white shadow-sm rounded">
+                    <div class="col-md-5 text-center">
                     <a href="{{URL::to('/blog/'.$value->id)}}">
                         <img src="/image/{{$value->image}}" class="w-100" style="height: 160px;"> 
                     </a>
@@ -30,5 +30,3 @@
         @endforeach
     </div>
 @endsection
-
-lorem

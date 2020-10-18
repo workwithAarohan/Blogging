@@ -94,7 +94,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return Redirect::to('category');
+        return redirect()->back();
     }
 
     /**
