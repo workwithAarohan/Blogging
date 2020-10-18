@@ -20,6 +20,7 @@ Route::get('/del_category/{cat_id}','CategoryController@destroy')->name('delete.
 
 Route::resource('/blog','BlogController');
 Route::get('/del_blog/{blog_id}','BlogController@destroy')->name('delete.blog');
+Route::get('/cat/{cat_id}/blog','BlogController@blogCategoryWise')->name('blogCategory.index');
 
 Route::post('/feedback/store','BlogController@storeFeedback')->name('feedback.blog');
 Route::get('/feedback/edit/{id}','BlogController@editFeedback')->name('feedback.edit');

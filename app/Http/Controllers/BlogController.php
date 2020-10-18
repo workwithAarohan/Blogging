@@ -8,6 +8,7 @@ use Auth;
 use App\Blog;
 use App\User;
 use App\Feedback;
+use DB;
 use View;
 use Redirect;
 
@@ -21,8 +22,36 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $blog = Blog::all();
-        return View::make('blog.index')->with('blog', $blog);
+        $recentBlog = Blog::all()->sortByDesc('created_at');
+        
+        foreach($recentBlog as $value)
+        {
+            $category = Category::where('id',$value->cat_id)->get();
+            $value->category = $category;
+
+            $average = round(Feedback::where('blog_id',$value->id)->avg('rating'));
+            $value->average = $average;
+        }
+        $recent = $recentBlog->take(3);
+        
+        $blog_topRated = $recentBlog->sortByDesc('average')->take(3);
+
+        return View::make('blog.index',compact('recent','blog_topRated'));
+    }
+
+    public function blogCategoryWise($id)
+    {
+        $blog = Blog::where('cat_id', $id)->get();
+        $category = Category::find($id);
+        $blog->catTitle = $category->title;   //Select title from categories where id = $id;
+
+        foreach($blog as $value)
+        {
+            $average = round(Feedback::where('blog_id',$value->id)->avg('rating'));
+            $value->average = $average;
+        }
+       
+        return View::make('blog.catwiseIndex',compact('blog'));
     }
 
     /**

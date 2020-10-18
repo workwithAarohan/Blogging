@@ -42,6 +42,6 @@ class HomeController extends Controller
             $value->rating = $average;
         }
 
-        return View::make('admin.author',compact('user','blog_count'));
+        return View::make('home',compact('user','blog_count'));
     }
 }

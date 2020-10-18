@@ -7,9 +7,9 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col col-md-9 mb-4">
-                <button type="button" class="btn btn-outline-info float-right rounded" data-toggle="modal" data-target="#createcat">
+        <div class="row justify-content-end ml-3">
+            <div class="col col-md-8 mb-4">
+                <button type="button" class="btn btn-outline-info rounded" data-toggle="modal" data-target="#createcat">
                 Add New Category
                 </button>
 
@@ -35,6 +35,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-3">
+                <span class="badge badge-primary" style="padding-top: 12px; text-align:center; width: 7rem; height: 3rem; font-size: 2rem; ">
+                    {{$category->count}}
+                </span>
             </div>
         </div>
         <div class="row justify-content-center">
